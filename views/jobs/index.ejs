@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings - Elevate Workforce Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin: 0 0.25rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+            background-color: #eff6ff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #f1f5f9 100%);
+            padding: 4rem 0 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Search Section */
+        .search-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-input {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background-color: var(--light-bg);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+            background-color: var(--card-bg);
+        }
+
+        .search-btn {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Job Cards */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .job-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .job-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .job-company {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .job-meta-item i {
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+
+        .job-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-date {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Badges */
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-primary {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+        }
+
+        .badge-success {
+            background-color: #f0fdf4;
+            color: var(--success-color);
+        }
+
+        .badge-warning {
+            background-color: #fffbeb;
+            color: var(--warning-color);
+        }
+
+        /* Buttons */
+        .btn {
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Alerts */
+        .alert {
+            border-radius: 12px;
+            border: none;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .alert-success {
+            background-color: #f0fdf4;
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+
+        .alert-info {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+
+        .empty-state-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-text {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .page-link {
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .page-link:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: #eff6ff;
+        }
+
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer h5 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer p, .footer a {
+            color: #94a3b8;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .search-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/jobs">
+                <i class="fas fa-briefcase me-2"></i>Elevate Workforce
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/jobs">
+                            <i class="fas fa-search me-1"></i>Browse Jobs
+                        </a>
+                    </li>
+                    <% if (user && user.role === 'company') { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/company/dashboard">
+                                <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/company/jobs/create">
+                                <i class="fas fa-plus me-1"></i>Post Job
+                            </a>
+                        </li>
+                    <% } %>
+                    <% if (user && user.role === 'job_seeker') { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/applications/my-applications">
+                                <i class="fas fa-file-alt me-1"></i>My Applications
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <% if (user) { %>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-1"></i><%= user.name %>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/auth/logout">
+                                    <i class="fas fa-sign-out-alt me-1"></i>Logout
+                                </a></li>
+                            </ul>
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/register">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="margin-top: 80px;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Find Your Dream Job</h1>
+                    <p class="hero-subtitle">Discover thousands of job opportunities with all the information you need. Its your future.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="search-card">
+                        <form method="GET" action="/jobs">
+                            <div class="input-group">
+                                <input type="text" class="form-control search-input" name="search" 
+                                       placeholder="Search for jobs, companies, or keywords..." value="<%= search %>">
+                                <button class="btn btn-primary search-btn" type="submit">
+                                    <i class="fas fa-search me-2"></i>Search Jobs
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Messages -->
+        <% if (message) { %>
+            <div class="alert alert-success alert-dismissible fade show">
+                <i class="fas fa-check-circle me-2"></i><%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <% } %>
+
+        <% if (search) { %>
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                Showing results for "<strong><%= search %></strong>"
+                <a href="/jobs" class="btn btn-sm btn-outline-primary ms-2">Clear Search</a>
+            </div>
+        <% } %>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number"><%= jobs.length %></div>
+                <div class="stat-label">Jobs Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Companies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Job Seekers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+        </div>
+
+        <!-- Job Listings -->
+        <% if (jobs.length === 0) { %>
+            <div class="empty-state">
+                <i class="fas fa-search empty-state-icon"></i>
+                <h3 class="empty-state-title">No Jobs Found</h3>
+                <p class="empty-state-text">
+                    <% if (search) { %>
+                        No jobs match your search criteria. Try different keywords or browse all jobs.
+                    <% } else { %>
+                        There are no job listings available at the moment. Check back soon for new opportunities!
+                    <% } %>
+                </p>
+                <% if (!search) { %>
+                    <a href="/auth/register" class="btn btn-primary">
+                        <i class="fas fa-user-plus me-2"></i>Register as Company to Post Jobs
+                    </a>
+                <% } else { %>
+                    <a href="/jobs" class="btn btn-primary">
+                        <i class="fas fa-list me-2"></i>View All Jobs
+                    </a>
+                <% } %>
+            </div>
+        <% } else { %>
+            <div class="jobs-grid">
+                <% jobs.forEach(job => { %>
+                    <div class="job-card" onclick="window.location.href='/jobs/<%= job.id %>'">
+                        <div class="job-header">
+                            <div class="flex-grow-1">
+                                <h3 class="job-title"><%= job.title %></h3>
+                                <div class="job-company">
+                                    <i class="fas fa-building me-1"></i><%= job.company_name %>
+                                </div>
+                            </div>
+                            <span class="badge badge-primary"><%= job.job_type.replace('_', ' ').toUpperCase() %></span>
+                        </div>
+                        
+                        <div class="job-meta">
+                            <div class="job-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <%= job.location %>
+                            </div>
+                            <% if (job.salary_range) { %>
+                                <div class="job-meta-item">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <%= job.salary_range %>
+                                </div>
+                            <% } %>
+                        </div>
+                        
+                        <p class="job-description">
+                            <%= job.description.substring(0, 150) %>...
+                        </p>
+                        
+                        <div class="job-footer">
+                            <span class="job-date">
+                                <i class="fas fa-clock me-1"></i>
+                                <%= new Date(job.created_at).toLocaleDateString('en-US', { 
+                                    month: 'short', 
+                                    day: 'numeric',
+                                    year: 'numeric'
+                                }) %>
+                            </span>
+                            <a href="/jobs/<%= job.id %>" class="btn btn-outline-primary btn-sm">
+                                View Details <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+
+        <!-- Pagination -->
+        <% if (totalPages > 1) { %>
+            <nav aria-label="Job listings pagination">
+                <ul class="pagination">
+                    <% if (hasPrevPage) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="/jobs?page=<%= prevPage %><%= search ? '&search=' + search : '' %>">
+                                <i class="fas fa-chevron-left me-1"></i>Previous
+                            </a>
+                        </li>
+                    <% } %>
+                    
+                    <% for (let i = 1; i <= totalPages; i++) { %>
+                        <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                            <a class="page-link" href="/jobs?page=<%= i %><%= search ? '&search=' + search : '' %>">
+                                <%= i %>
+                            </a>
+                        </li>
+                    <% } %>
+                    
+                    <% if (hasNextPage) { %>
+                        <li class="page-item">
+                            <a class="page-link" href="/jobs?page=<%= nextPage %><%= search ? '&search=' + search : '' %>">
+                                Next<i class="fas fa-chevron-right ms-1"></i>
+                            </a>
+                        </li>
+                    <% } %>
+                </ul>
+            </nav>
+        <% } %>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-briefcase me-2"></i>Elevate Workforce Solutions</h5>
+                    <p class="mb-3">Connecting talented professionals with amazing opportunities across Nepal. Your career journey starts here.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/jobs">Browse Jobs</a></li>
+                        <li><a href="/auth/register">Register</a></li>
+                        <li><a href="/auth/login">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Info</h5>
+                    <p><i class="fas fa-envelope me-2"></i>info@elevateworkforce.com</p>
+                    <p><i class="fas fa-phone me-2"></i>+977-1-4567890</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>Kathmandu, Nepal</p>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: #475569;">
+            <div class="text-center">
+                <p>&copy; 2024 Elevate Workforce Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation to job cards
+            document.querySelectorAll('.job-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'A') {
+                        this.style.opacity = '0.7';
+                        this.style.transform = 'scale(0.98)';
+                    }
+                });
+            });
+
+            // Auto-dismiss alerts
+            setTimeout(() => {
+                document.querySelectorAll('.alert').forEach(alert => {
+                    if (alert.classList.contains('show')) {
+                        alert.classList.remove('show');
+                        setTimeout(() => alert.remove(), 300);
+                    }
+                });
+            }, 5000);
+
+            // Animate stats on scroll
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statNumber = entry.target.querySelector('.stat-number');
+                        const finalValue = parseInt(statNumber.textContent);
+                        animateNumber(statNumber, finalValue);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.stat-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        function animateNumber(element, finalValue) {
+            let currentValue = 0;
+            const increment = finalValue / 50;
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= finalValue) {
+                    element.textContent = finalValue + (finalValue === 95 ? '%' : finalValue > 50 ? '+' : '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(currentValue);
+                }
+            }, 30);
+        }
+    </script>
+</body>
+</html>
